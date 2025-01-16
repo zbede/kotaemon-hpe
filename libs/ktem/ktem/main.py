@@ -210,7 +210,7 @@ class App(BaseApp):
             )
    
         # Create an instance of FileIndexPage
-        file_index_page = FileIndexPage(self.app, self.app.index_manager)
+        file_index_page = FileIndexPage(self.app)
         
         # Call index_fn when the app is created
         library_path = "libs/library"
