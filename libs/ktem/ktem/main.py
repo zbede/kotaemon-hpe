@@ -207,7 +207,11 @@ class App(BaseApp):
                 outputs=[self.setup_page_wrapper, self.tabs],
             )
         
-       # Assuming the methods are in the IndexManagement class
+        # Ensure the app has an index_manager attribute
+        if not hasattr(self.app, 'index_manager'):
+            self.app.index_manager = IndexManager()  # Initialize IndexManager if not present
+        
+        # Assuming the methods are in the IndexManagement class
         index_management = IndexManagement(self.app)
         
         # Call index_fn when the app is created
