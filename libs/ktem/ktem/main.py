@@ -7,7 +7,7 @@ from ktem.pages.resources import ResourcesTab
 from ktem.pages.settings import SettingsPage
 from ktem.pages.setup import SetupPage
 from theflow.settings import settings as flowsettings
-from ktem.index.ui import IndexManagement 
+from ktem.index.file.index import FileIndex 
 from ktem.index.manager import IndexManager
 from ktem.index.file.ui import FileIndexPage  
 
@@ -213,8 +213,11 @@ class App(BaseApp):
         if not hasattr(self.app, 'index_manager'):
             self.app.index_manager = IndexManager(self.app)  # Initialize IndexManager if not present
         
+        # Create an instance of FileIndex
+        file_index = FileIndex(self.app, id=1, name="default", config={})
+        
         # Create an instance of FileIndexPage
-        file_index_page = FileIndexPage(self.app, self.app.index_manager)
+        file_index_page = FileIndexPage(self.app, file_index)
         
         # Call index_fn when the app is created
         library_path = "libs/library"
