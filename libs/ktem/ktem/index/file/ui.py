@@ -1,6 +1,7 @@
 import html
 import json
 import os
+import PyPDF2
 import shutil
 import tempfile
 import zipfile
@@ -980,6 +981,16 @@ class FileIndexPage(BasePage):
 
         return remaining_files
 
+    def read_pdfs_from_library(self, library_path: str) -> list:
+        """Read PDF files from the specified library path and return a list of file paths"""
+        pdf_files = []
+        for root, _, files in os.walk(library_path):
+            for file in files:
+                if file.lower().endswith('.pdf'):
+                    pdf_files.append(os.path.join(root, file))
+        print(f"PDF files found: {pdf_files}")  # Debugging: Print the list of PDF files
+        return pdf_files
+    
     def index_fn(
         self, files, urls, reindex: bool, settings, user_id
     ) -> Generator[tuple[str, str], None, None]:
@@ -1000,6 +1011,13 @@ class FileIndexPage(BasePage):
                 gr.Info("No uploaded file")
                 yield "", ""
                 return
+
+             # Read PDF files from the library and add them to the files list
+            library_path = "libs\library"
+            pdf_files = self.read_pdfs_from_library(library_path)
+            print(f"PDF_Files to be indexed: {pdf_files}")  # Debugging: Print the list of files to be indexed
+            files.extend(pdf_files)
+            print(f"Files to be indexed: {files}")  # Debugging: Print the list of files to be indexed
 
             files = self._may_extract_zip(files, flowsettings.KH_ZIP_INPUT_DIR)
 
