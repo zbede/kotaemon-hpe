@@ -209,8 +209,12 @@ class App(BaseApp):
                 outputs=[self.setup_page_wrapper, self.tabs],
             )
    
+        # Ensure the app has an index_manager attribute
+        if not hasattr(self.app, 'index_manager'):
+            self.app.index_manager = IndexManager(self.app)  # Initialize IndexManager if not present
+        
         # Create an instance of FileIndexPage
-        file_index_page = FileIndexPage(self.app)
+        file_index_page = FileIndexPage(self.app, self.app.index_manager)
         
         # Call index_fn when the app is created
         library_path = "libs/library"
