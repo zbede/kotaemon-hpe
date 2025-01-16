@@ -206,15 +206,18 @@ class App(BaseApp):
                 outputs=[self.setup_page_wrapper, self.tabs],
             )
         
+       # Assuming the methods are in the IndexManagement class
+        index_management = IndexManagement(self.app)
+        
         # Call index_fn when the app is created
         library_path = "libs/library"
-        pdf_files = self.read_pdfs_from_library(library_path)
-        files = self._may_extract_zip(pdf_files, flowsettings.KH_ZIP_INPUT_DIR)
+        pdf_files = index_management.read_pdfs_from_library(library_path)
+        files = index_management._may_extract_zip(pdf_files, flowsettings.KH_ZIP_INPUT_DIR)
         urls = ""
         reindex = False
         settings = {}  # Add appropriate settings if needed
         user_id = None  # Add appropriate user_id if needed
 
-        for result in self.index_fn(files, urls, reindex, settings, user_id):
+        for result in index_management.index_fn(files, urls, reindex, settings, user_id):
             print(result)
     
