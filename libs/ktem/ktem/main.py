@@ -9,7 +9,7 @@ from ktem.pages.setup import SetupPage
 from theflow.settings import settings as flowsettings
 from ktem.index.ui import IndexManagement 
 from ktem.index.manager import IndexManager
-from ktem.index.ui import FileIndexPage  
+from ktem.index.file.ui import FileIndexPage  
 
 KH_DEMO_MODE = getattr(flowsettings, "KH_DEMO_MODE", False)
 KH_ENABLE_FIRST_SETUP = getattr(flowsettings, "KH_ENABLE_FIRST_SETUP", False)
