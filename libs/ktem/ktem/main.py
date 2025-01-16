@@ -215,6 +215,7 @@ class App(BaseApp):
         
         # Create an instance of FileIndex
         file_index = FileIndex(self.app, id=1, name="default", config={})
+        file_index.on_start()  # Ensure the necessary classes and hooks are set up
         
         # Create an instance of FileIndexPage
         file_index_page = FileIndexPage(self.app, file_index)
