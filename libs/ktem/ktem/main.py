@@ -217,7 +217,7 @@ class App(BaseApp):
                 inputs=[],
                 outputs=[self.setup_page_wrapper, self.tabs],
             )
-            main 
+            
     def read_pdfs_from_library(self, library_path: str) -> list:
         """Read PDF files from the specified library path and return a list of file paths"""
         pdf_files = []
