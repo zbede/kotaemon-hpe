@@ -210,7 +210,7 @@ class App(BaseApp):
         
         # Ensure the app has an index_manager attribute
         if not hasattr(self.app, 'index_manager'):
-            self.app.index_manager = IndexManager()  # Initialize IndexManager if not present
+            self.app.index_manager = IndexManager(self.app)  # Initialize IndexManager if not present
         
         # Assuming the methods are in the IndexManagement class
         index_management = IndexManagement(self.app)
@@ -226,4 +226,3 @@ class App(BaseApp):
 
         for result in index_management.index_fn(files, urls, reindex, settings, user_id):
             print(result)
-    
