@@ -980,6 +980,16 @@ class FileIndexPage(BasePage):
 
         return remaining_files
 
+    def read_pdfs_from_library(self, library_path: str) -> list:
+        """Read PDF files from the specified library path and return a list of file paths"""
+        pdf_files = []
+        for root, _, files in os.walk(library_path):
+            for file in files:
+                if file.lower().endswith('.pdf'):
+                    pdf_files.append(os.path.join(root, file))
+        print(f"PDF files found: {pdf_files}")  # Debugging: Print the list of PDF files
+        return pdf_files
+    
     def index_fn(
         self, files, urls, reindex: bool, settings, user_id
     ) -> Generator[tuple[str, str], None, None]:
