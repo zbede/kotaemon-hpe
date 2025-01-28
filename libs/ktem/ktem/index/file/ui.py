@@ -269,8 +269,36 @@ class FileIndexPage(BasePage):
     def on_building_ui(self):
         """Build the UI of the app"""
         with gr.Row():
+            with gr.Column(scale=1):
+                with gr.Column() as self.upload:
+                    with gr.Tab("Upload Files"):
+                        self.files = File(
+                            file_types=self._supported_file_types,
+                            file_count="multiple",
+                            container=True,
+                            show_label=False,
+                        )
 
-                
+                        msg = self.upload_instruction()
+                        if msg:
+                            gr.Markdown(msg)
+
+                    with gr.Tab("Use Web Links"):
+                        self.urls = gr.Textbox(
+                            label="Input web URLs",
+                            lines=8,
+                        )
+                        gr.Markdown("(separated by new line)")
+
+                    with gr.Accordion("Advanced indexing options", open=True):
+                        with gr.Row():
+                            self.reindex = gr.Checkbox(
+                                value=False, label="Force reindex file", container=False
+                            )
+
+                    self.upload_button = gr.Button(
+                        "Upload and Index", variant="primary"
+                    )
 
             with gr.Column(scale=4):
                 with gr.Column(visible=False) as self.upload_progress_panel:
