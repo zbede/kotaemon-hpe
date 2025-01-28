@@ -347,6 +347,7 @@ class FileIndex(BaseIndex):
     def get_index_page_ui(self):
         if self._index_ui is None:
             self._index_ui = self._index_ui_cls(self._app, self)
+            self._index_ui.on_building_ui()  # Call on_building_ui when the page is created
         return self._index_ui
 
     def get_user_settings(self):
