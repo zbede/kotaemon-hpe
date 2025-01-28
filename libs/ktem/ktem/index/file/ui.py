@@ -300,27 +300,6 @@ class FileIndexPage(BasePage):
                         "Upload and Index", variant="primary"
                     )
 
-            with gr.Column(scale=4):
-                with gr.Column(visible=False) as self.upload_progress_panel:
-                    gr.Markdown("## Upload Progress")
-                    with gr.Row():
-                        self.upload_result = gr.Textbox(
-                            lines=1, max_lines=20, label="Upload result"
-                        )
-                        self.upload_info = gr.Textbox(
-                            lines=1, max_lines=20, label="Upload info"
-                        )
-                    self.btn_close_upload_progress_panel = gr.Button(
-                        "Clear Upload Info and Close",
-                        variant="secondary",
-                        elem_classes=["right-button"],
-                    )
-
-                with gr.Tab("Files"):
-                    self.render_file_list()
-
-                with gr.Tab("Groups"):
-                    self.render_group_list()
 
     def on_subscribe_public_events(self):
         """Subscribe to the declared public event of the app"""
