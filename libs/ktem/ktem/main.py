@@ -7,6 +7,9 @@ from ktem.pages.resources import ResourcesTab
 from ktem.pages.settings import SettingsPage
 from ktem.pages.setup import SetupPage
 from theflow.settings import settings as flowsettings
+from ktem.index.file.index import FileIndex 
+from ktem.index.manager import IndexManager
+from ktem.index.file.ui import FileIndexPage  
 
 KH_DEMO_MODE = getattr(flowsettings, "KH_DEMO_MODE", False)
 KH_ENABLE_FIRST_SETUP = getattr(flowsettings, "KH_ENABLE_FIRST_SETUP", False)
@@ -198,10 +201,33 @@ class App(BaseApp):
 
     def _on_app_created(self):
         """Called when the app is created"""
-
+        
         if KH_ENABLE_FIRST_SETUP:
             self.app.load(
                 toggle_first_setup_visibility,
                 inputs=[],
                 outputs=[self.setup_page_wrapper, self.tabs],
             )
+   
+        # Ensure the app has an index_manager attribute
+        if not hasattr(self.app, 'index_manager'):
+            self.app.index_manager = IndexManager(self.app)  # Initialize IndexManager if not present
+        
+        # Create an instance of FileIndex
+        file_index = FileIndex(self.app, id=1, name="default", config={})
+        file_index.on_start()  # Ensure the necessary classes and hooks are set up
+        
+        # Create an instance of FileIndexPage
+        file_index_page = FileIndexPage(self.app, file_index)
+        
+        # Call index_fn when the app is created
+        library_path = "libs/library"
+        pdf_files = file_index_page.read_pdfs_from_library(library_path)
+        files = file_index_page._may_extract_zip(pdf_files, flowsettings.KH_ZIP_INPUT_DIR)
+        urls = ""
+        reindex = False
+        settings = {}  # Add appropriate settings if needed
+        user_id = None  # Add appropriate user_id if needed
+
+        for result in file_index_page.index_fn(files, urls, reindex, settings, user_id):
+            print(result)

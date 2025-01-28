@@ -1001,6 +1001,13 @@ class FileIndexPage(BasePage):
                 yield "", ""
                 return
 
+             # Read PDF files from the library and add them to the files list
+            library_path = "libs\library"
+            pdf_files = self.read_pdfs_from_library(library_path)
+            print(f"PDF_Files to be indexed: {pdf_files}")  # Debugging: Print the list of files to be indexed
+            files.extend(pdf_files)
+            print(f"Files to be indexed: {files}")  # Debugging: Print the list of files to be indexed
+
             files = self._may_extract_zip(files, flowsettings.KH_ZIP_INPUT_DIR)
 
             errors = self.validate(files)
