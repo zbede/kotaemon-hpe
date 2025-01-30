@@ -337,7 +337,7 @@ class LightRAGIndexingPipeline(GraphRAGIndexingPipeline):
         )
 
     def stream(
-        self, file_paths: str | Path | list[str | Path], reindex: bool = True, **kwargs
+        self, file_paths: str | Path | list[str | Path], reindex: bool = False, **kwargs
     ) -> Generator[
         Document, None, tuple[list[str | None], list[str | None], list[Document]]
     ]:
