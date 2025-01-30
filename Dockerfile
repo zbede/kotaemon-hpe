@@ -27,9 +27,12 @@ ENV TARGETARCH=${TARGETARCH}
 # Create working directory
 WORKDIR /app
 
+# Install dos2unix
+RUN apt-get update && apt-get install -y dos2unix
+
 # Download pdfjs
 COPY scripts/download_pdfjs.sh /app/scripts/download_pdfjs.sh
-RUN chmod +x /app/scripts/download_pdfjs.sh
+RUN dos2unix /app/scripts/download_pdfjs.sh && chmod +x /app/scripts/download_pdfjs.sh
 ENV PDFJS_PREBUILT_DIR="/app/libs/ktem/ktem/assets/prebuilt/pdfjs-dist"
 RUN bash scripts/download_pdfjs.sh $PDFJS_PREBUILT_DIR
 
@@ -70,10 +73,13 @@ RUN apt-get update -qqy && \
         ffmpeg \
         libmagic-dev
 
+# Update CA certificates
+RUN apt-get install -y ca-certificates
+
 # Install torch and torchvision for unstructured
 RUN --mount=type=ssh  \
     --mount=type=cache,target=/root/.cache/pip  \
-    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+    pip install --trusted-host download.pytorch.org torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 
 # Install additional pip packages
 RUN --mount=type=ssh  \
