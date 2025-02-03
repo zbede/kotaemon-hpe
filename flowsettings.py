@@ -148,7 +148,7 @@ if config("OPENAI_API_KEY", default=""):
             "model": config("OPENAI_CHAT_MODEL", default="gpt-3.5-turbo"),
             "timeout": 20,
         },
-        "default": True,
+        "default": False,
     }
     KH_EMBEDDINGS["openai"] = {
         "spec": {
@@ -161,7 +161,7 @@ if config("OPENAI_API_KEY", default=""):
             "timeout": 10,
             "context_length": 8191,
         },
-        "default": True,
+        "default": False,
     }
 
 if config("LOCAL_MODEL", default=""):
@@ -172,7 +172,7 @@ if config("LOCAL_MODEL", default=""):
             "model": config("LOCAL_MODEL", default="llama3.1:8b"),
             "api_key": "ollama",
         },
-        "default": False,
+        "default": True,
     }
     KH_EMBEDDINGS["ollama"] = {
         "spec": {
@@ -181,7 +181,7 @@ if config("LOCAL_MODEL", default=""):
             "model": config("LOCAL_MODEL_EMBEDDINGS", default="nomic-embed-text"),
             "api_key": "ollama",
         },
-        "default": False,
+        "default": True,
     }
 
     KH_EMBEDDINGS["fast_embed"] = {
@@ -189,7 +189,7 @@ if config("LOCAL_MODEL", default=""):
             "__type__": "kotaemon.embeddings.FastEmbedEmbeddings",
             "model_name": "BAAI/bge-base-en-v1.5",
         },
-        "default": False,
+        "default": True,
     }
 
 # additional LLM configurations
