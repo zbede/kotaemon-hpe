@@ -189,7 +189,7 @@ if config("LOCAL_MODEL", default=""):
             "__type__": "kotaemon.embeddings.FastEmbedEmbeddings",
             "model_name": "BAAI/bge-base-en-v1.5",
         },
-        "default": True,
+        "default": False,
     }
 
 # additional LLM configurations
