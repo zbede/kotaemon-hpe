@@ -225,7 +225,7 @@ class App(BaseApp):
         pdf_files = file_index_page.read_pdfs_from_library(library_path)
         files = file_index_page._may_extract_zip(pdf_files, flowsettings.KH_ZIP_INPUT_DIR)
         urls = ""
-        reindex = False
+        reindex = True
         settings = {}  # Add appropriate settings if needed
         user_id = None  # Add appropriate user_id if needed
 
