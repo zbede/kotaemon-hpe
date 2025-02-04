@@ -342,7 +342,7 @@ class FileIndex(BaseIndex):
     def get_selector_component_ui(self):
         if self._selector_ui is None:
             self._selector_ui = self._selector_ui_cls(self._app, self)
-            self.index_ui.on_building_ui()
+            self._index_ui.on_building_ui()
         return self._selector_ui
 
     def get_index_page_ui(self):
