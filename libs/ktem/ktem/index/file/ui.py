@@ -129,7 +129,6 @@ class FileIndexPage(BasePage):
         # TODO: on_building_ui is not correctly named if it's always called in
         # the constructor
         self.public_events = [f"onFileIndex{index.id}Changed"]
-        self.on_building_ui()
 
     def upload_instruction(self) -> str:
         msgs = []
