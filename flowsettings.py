@@ -27,7 +27,7 @@ if not KH_APP_VERSION:
 
 KH_ENABLE_FIRST_SETUP = True
 KH_DEMO_MODE = config("KH_DEMO_MODE", default=False, cast=bool)
-KH_OLLAMA_URL = config("KH_OLLAMA_URL", default="http://localhost:11434/")
+KH_OLLAMA_URL = config("KH_OLLAMA_URL", default="http://localhost:11434/v1/")
 
 # App can be ran from anywhere and it's not trivial to decide where to store app data.
 # So let's use the same directory as the flowsetting.py file.
